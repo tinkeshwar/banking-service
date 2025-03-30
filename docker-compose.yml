@@ -1,0 +1,20 @@
+services:
+  banking-service:
+    build: ./
+    image: banking-service:1.0.0
+    container_name: banking-service
+    env_file: ./.env
+    networks:
+      - gateway
+    environment:
+      - NODE_ENV=dev
+    restart: always
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/dist
+
+networks:
+  gateway:
+    name: nginx-gateway-banking
+    driver: bridge
