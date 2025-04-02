@@ -10,9 +10,11 @@ import {
   Unique,
   AllowNull,
   DataType,
-  Index
+  Index,
+  HasMany
 } from 'sequelize-typescript';
 import { User } from '~/models/User';
+import { MemberAddress } from '~/models/MemberAddress';
 
 @Table({
   tableName: 'members',
@@ -21,6 +23,10 @@ import { User } from '~/models/User';
   paranoid: true
 })
 export class Member extends Model {
+
+  @HasMany(() => MemberAddress)
+  addresses!: MemberAddress[]
+
   @PrimaryKey
   @AutoIncrement
   @Column
