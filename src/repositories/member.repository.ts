@@ -7,8 +7,9 @@ export const createMemberWithAddresses = async (member: MemberInterface & { user
 }
 
 export const updateMemberWithAddress = async (member: MemberInterface, addresses: MemberAddressInterface[], memberId: number): Promise<Boolean> => {
-  await MemberAddress.destroy({ where: { memberId } });
+  // TODO: It need improvement in logic (Priority 3).
   const mappedAddresses = addresses.map((address) => { return { ...address, memberId }});
+  await MemberAddress.destroy({ where: { memberId } });
   await MemberAddress.bulkCreate(mappedAddresses);
   await Member.update(member, { where: { id: memberId } });
   return true
