@@ -14,7 +14,7 @@ export const authenticateToken = async (ctx: Context, next: Next): Promise<void>
   if (!token) {
     throw ErrorIs('Access token is required', 403);
   }
-  const decoded = AuthService.verifyToken(token) as unknown as { userId: string};
+  const decoded = await AuthService.verifyToken(token) as unknown as { userId: string};
   if (decoded && decoded.userId) {
     await next();
   } else {

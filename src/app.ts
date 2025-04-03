@@ -7,8 +7,10 @@ import { Server } from 'http';
 import { PORT } from '~/constants/variables';
 import routes from '~/routes/index'
 import globalErrorMiddleware from '~/middlewares/error.middleware';
+import transformerMiddleware from './middlewares/transform.middleware';
 
 const app = new Koa();
+app.use(transformerMiddleware)
 app.use(globalErrorMiddleware)
 app.use(cors());
 app.use(bodyParser());
