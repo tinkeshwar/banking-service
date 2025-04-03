@@ -1,7 +1,7 @@
 import Router from '@koa/router';
 import { login, refresh } from '~/controllers/auth.controller';
-import { validateRequest } from '~/middleware/validate.middleware';
-import { loginSchema, refreshTokenSchema } from '../validation/auth.validation';
+import { validateRequest } from '~/middlewares/validate.middleware';
+import { loginSchema, refreshTokenSchema } from '../validations/auth.validation';
 import { Context } from 'koa';
 
 const router = new Router({

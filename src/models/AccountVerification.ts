@@ -64,7 +64,6 @@ export class AccountVerification extends Model {
   @Column
   updatedAt!: Date;
 
-  @AllowNull(true)
   @Column
   deletedAt?: Date;
 }

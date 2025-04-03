@@ -67,7 +67,6 @@ export class MemberAddress extends Model {
   @Column
   updatedAt!: Date;
 
-  @AllowNull(false)
   @Column
   deletedAt?: Date;
 }

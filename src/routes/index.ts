@@ -2,6 +2,7 @@ import Router from '@koa/router';
 import healthRoutes from '~/routes/health.routes';
 import authRoutes from '~/routes/auth.routes';
 import userRoutes from '~/routes/user.routes';
+import memberRoutes from '~/routes/member.routes';
 
 const router = new Router({
   prefix: '/api'
@@ -10,5 +11,6 @@ const router = new Router({
 router.use(healthRoutes.routes());
 router.use(userRoutes.routes());
 router.use(authRoutes.routes());
+router.use(memberRoutes.routes());
 
 export default router;

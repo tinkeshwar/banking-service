@@ -1,7 +1,7 @@
 import Router from '@koa/router';
-import { validateRequest } from '../middleware/validate.middleware';
-import { createUserSchema } from '../validation/user.validation';
-import { authenticateToken } from '../middleware/auth.middleware';
+import { validateRequest } from '../middlewares/validate.middleware';
+import { createUserSchema } from '../validations/user.validation';
+import { authenticateToken } from '../middlewares/auth.middleware';
 import { Context } from 'koa';
 import { initialize } from '~/controllers/user.controller';
 

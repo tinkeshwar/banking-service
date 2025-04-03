@@ -10,9 +10,11 @@ import {
   HasMany,
   AllowNull,
   Index,
+  HasOne,
 } from 'sequelize-typescript';
 import bcrypt from 'bcrypt';
 import { UserProfile } from '~/models/UserProfile';
+import { Member } from '~/models/Member';
 
 @Table({
   tableName: 'users',
@@ -31,6 +33,9 @@ export class User extends Model {
 
   @HasMany(() => UserProfile)
   profiles!: UserProfile[];
+
+  @HasOne(() => Member)
+  member!: Member;
 
   @PrimaryKey
   @AutoIncrement

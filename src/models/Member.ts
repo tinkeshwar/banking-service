@@ -25,7 +25,10 @@ import { MemberAddress } from '~/models/MemberAddress';
 export class Member extends Model {
 
   @HasMany(() => MemberAddress)
-  addresses!: MemberAddress[]
+  addresses!: MemberAddress[];
+
+  @BelongsTo(() => User)
+  user!: User;
 
   @PrimaryKey
   @AutoIncrement
@@ -36,9 +39,6 @@ export class Member extends Model {
   @AllowNull(false)
   @Column
   userId!: number;
-
-  @BelongsTo(() => User)
-  user!: User;
 
   @Column
   firstName!: string;
@@ -87,8 +87,8 @@ export class Member extends Model {
   @Column(DataType.DECIMAL(10, 2))
   income!: number;
 
-  @Column(DataType.ENUM('active', 'retired', 'resigned', 'terminated'))
-  employmentStatus!: 'active' | 'retired' | 'resigned' | 'terminated';
+  @Column(DataType.ENUM('Active', 'Retired', 'Resigned', 'Terminated'))
+  employmentStatus!: 'Active' | 'Retired' | 'Resigned' | 'Terminated';
 
   @Index('members_created_at_idx')
   @Column
@@ -97,7 +97,6 @@ export class Member extends Model {
   @Column
   updatedAt!: Date;
 
-  @AllowNull(false)
   @Column
   deletedAt?: Date;
 }

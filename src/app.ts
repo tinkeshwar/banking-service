@@ -6,7 +6,7 @@ import logger from '~/utils/logger';
 import { Server } from 'http';
 import { PORT } from '~/constants/variables';
 import routes from '~/routes/index'
-import globalErrorMiddleware from '~/middleware/error.middleware';
+import globalErrorMiddleware from '~/middlewares/error.middleware';
 
 const app = new Koa();
 app.use(globalErrorMiddleware)

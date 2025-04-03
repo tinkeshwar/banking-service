@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('addresses', {
+    await queryInterface.createTable('member_addresses', {
       id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
       memberId: { type: Sequelize.INTEGER, allowNull: false, field: 'member_id', references: { model: 'members', key: 'id' } },
       addressType: { type: Sequelize.ENUM('local', 'current', 'permanent'), allowNull: false, field: 'address_type' },
@@ -18,19 +18,19 @@ module.exports = {
       deletedAt: { type: Sequelize.DATE, allowNull: true, field: 'deleted_at' }
     });
 
-    await queryInterface.addIndex('addresses', ['member_id'], { name: 'addresses_member_id_idx' });
-    await queryInterface.addIndex('addresses', ['address_type'], { name: 'addresses_address_type_idx' });
-    await queryInterface.addIndex('addresses', ['city'], { name: 'addresses_city_idx' });
-    await queryInterface.addIndex('addresses', ['postal_code'], { name: 'addresses_postal_code_idx' });
-    await queryInterface.addIndex('addresses', ['created_at'], { name: 'addresses_created_at_idx' });  },
+    await queryInterface.addIndex('member_addresses', ['member_id'], { name: 'member_addresses_member_id_idx' });
+    await queryInterface.addIndex('member_addresses', ['address_type'], { name: 'member_addresses_address_type_idx' });
+    await queryInterface.addIndex('member_addresses', ['city'], { name: 'member_addresses_city_idx' });
+    await queryInterface.addIndex('member_addresses', ['postal_code'], { name: 'member_addresses_postal_code_idx' });
+    await queryInterface.addIndex('member_addresses', ['created_at'], { name: 'member_addresses_created_at_idx' });  },
 
   async down (queryInterface) {
-    await queryInterface.removeConstraint('addresses', 'addresses_ibfk_1');
-    await queryInterface.removeIndex('addresses', 'addresses_created_at_idx');
-    await queryInterface.removeIndex('addresses', 'addresses_postal_code_idx');
-    await queryInterface.removeIndex('addresses', 'addresses_city_idx');
-    await queryInterface.removeIndex('addresses', 'addresses_address_type_idx');
-    await queryInterface.removeIndex('addresses', 'addresses_member_id_idx');
-    await queryInterface.dropTable('addresses');
+    await queryInterface.removeConstraint('member_addresses', 'member_addresses_ibfk_1');
+    await queryInterface.removeIndex('member_addresses', 'member_addresses_created_at_idx');
+    await queryInterface.removeIndex('member_addresses', 'member_addresses_postal_code_idx');
+    await queryInterface.removeIndex('member_addresses', 'member_addresses_city_idx');
+    await queryInterface.removeIndex('member_addresses', 'member_addresses_address_type_idx');
+    await queryInterface.removeIndex('member_addresses', 'member_addresses_member_id_idx');
+    await queryInterface.dropTable('member_addresses');
   }
 };

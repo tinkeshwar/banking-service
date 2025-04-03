@@ -66,7 +66,6 @@ export class AccountDetail extends Model {
   @Column
   updatedAt!: Date;
 
-  @AllowNull(true)
   @Column
   deletedAt?: Date;
 }

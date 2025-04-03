@@ -76,7 +76,6 @@ export class AccountTransaction extends Model {
   @Column
   updatedAt!: Date;
 
-  @AllowNull(true)
   @Column
   deletedAt?: Date;
 }
