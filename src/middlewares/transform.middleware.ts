@@ -1,3 +1,5 @@
+import { Context } from "koa";
+
 const sensitive = ['deletedAt', 'password']
 
 const transformKeys = (obj: Record<string, any> | any[] | null): Record<string, any> | any[] | null => {
@@ -12,10 +14,6 @@ const transformKeys = (obj: Record<string, any> | any[] | null): Record<string, 
     return acc;
   }, {});
 };
-
-interface Context {
-  body: Record<string, any> | any[] | null;
-}
 
 const transformerMiddleware = async (ctx: Context, next: () => Promise<void>): Promise<void> => {
   await next();
