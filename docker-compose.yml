@@ -1,14 +1,18 @@
 services:
   banking-service:
-    build: ./
-    image: banking-service:1.0.0
+    image: tinkeshwar/banking-service:1.0.0-dev
     container_name: banking-service
     env_file: ./.env
     networks:
       - gateway
     environment:
       - NODE_ENV=dev
+      - DB_HOST=host.docker.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     restart: always
+    ports:
+      - 5001:5001
     volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules

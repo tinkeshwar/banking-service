@@ -5,10 +5,10 @@ ENV APP_PATH=/usr/src/app
 ENV TMP=/tmp
 
 COPY . ${TMP}
-RUN cd ${TMP} && npm install && npm run build && mkdir -p ${APP_PATH} && cp -a node_modules ${APP_PATH} && cp -a dist ${APP_PATH} && cp package*.json ${APP_PATH}
+RUN cd ${TMP} && npm install && npm run build && mkdir -p ${APP_PATH} && cp -a node_modules ${APP_PATH} && cp -a dist ${APP_PATH} && cp package*.json ${APP_PATH} && cp tsconfig.json ${APP_PATH}
 
 WORKDIR ${APP_PATH}
 
 # Run the application
-CMD [ "node", "dist/app.js" ]
+CMD ["node", "-r", "tsconfig-paths/register", "dist/app.js"]
 

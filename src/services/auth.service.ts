@@ -1,5 +1,5 @@
 import JWT from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { JWT_SECRET, JWT_EXPIRATION, REFRESH_TOKEN_EXPIRATION } from '~/constants/variables';
 import { AuthPayloadInterface } from '~/@types/auth.dto';
 import { User } from '~/models/User';

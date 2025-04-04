@@ -8,11 +8,10 @@ import {
   BeforeCreate,
   BeforeUpdate,
   HasMany,
-  AllowNull,
   Index,
   HasOne,
 } from 'sequelize-typescript';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { UserProfile } from '~/models/UserProfile';
 import { Member } from '~/models/Member';
 
