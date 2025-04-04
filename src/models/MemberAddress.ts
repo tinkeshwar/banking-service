@@ -12,6 +12,12 @@ import {
 } from 'sequelize-typescript';
 import { Member } from '~/models/Member';
 
+enum AddressType {
+  LOCAL = 'local',
+  CURRENT = 'current',
+  PERMANENT = 'permanent'
+}
+
 @Table({
   tableName: 'member_addresses',
   timestamps: true,
@@ -25,38 +31,30 @@ export class MemberAddress extends Model {
   id!: number;
 
   @ForeignKey(() => Member)
-  @AllowNull(false)
   @Column
   memberId!: number;
 
   @BelongsTo(() => Member)
   member!: Member;
 
-  @AllowNull(false)
-  @Column(DataType.ENUM('local', 'current', 'permanent'))
-  addressType!: 'local' | 'current' | 'permanent';
+  @Column(DataType.ENUM(...Object.values(AddressType)))
+  addressType!: AddressType;
 
-  @AllowNull(false)
   @Column
   line1!: string;
 
-  @AllowNull(true)
   @Column
   line2?: string;
 
-  @AllowNull(false)
   @Column
   city!: string;
 
-  @AllowNull(false)
   @Column
   state!: string;
 
-  @AllowNull(false)
   @Column
   country!: string;
 
-  @AllowNull(false)
   @Column
   postalCode!: string;
 

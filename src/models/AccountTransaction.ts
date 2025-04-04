@@ -13,9 +13,16 @@ import {
 import { Account } from '~/models/Account';
 import { User } from '~/models/User';
 
-type TransactionType = 'credit' | 'debit';
-type TransactionMode = 'cash' | 'transfer' | 'cheque';
+enum TransactionType {
+  CREDIT = 'credit',
+  DEBIT = 'debit'
+}
 
+enum TransactionMode {
+  CASH = 'cash',
+  TRANSFER = 'transfer',
+  CHEQUE = 'cheque'
+}
 @Table({
   tableName: 'account_transactions',
   timestamps: true,
@@ -36,31 +43,25 @@ export class AccountTransaction extends Model {
   @BelongsTo(() => Account)
   account!: Account;
 
-  @AllowNull(false)
-  @Column(DataType.ENUM('credit', 'debit'))
+  @Column(DataType.ENUM(...Object.values(TransactionType)))
   transactionType!: TransactionType;
 
-  @AllowNull(false)
   @Column(DataType.DECIMAL(10, 2))
   transactionAmount!: number;
 
-  @AllowNull(false)
-  @Column(DataType.ENUM('cash', 'transfer', 'cheque'))
+  @Column(DataType.ENUM(...Object.values(TransactionMode)))
   transactionMode!: TransactionMode;
 
   @Column(DataType.TEXT)
   transactionReference!: string;
 
-  @AllowNull(false)
   @Column(DataType.DECIMAL(10, 2))
   balanceBeforeTransaction!: number;
 
-  @AllowNull(false)
   @Column(DataType.DECIMAL(10, 2))
   balanceAfterTransaction!: number;
 
   @ForeignKey(() => User)
-  @AllowNull(false)
   @Column
   createdBy!: number;
 
@@ -68,11 +69,9 @@ export class AccountTransaction extends Model {
   creator!: User;
 
   @Index('account_transactions_created_at_idx')
-  @AllowNull(false)
   @Column
   createdAt!: Date;
 
-  @AllowNull(false)
   @Column
   updatedAt!: Date;
 

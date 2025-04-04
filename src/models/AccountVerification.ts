@@ -13,7 +13,12 @@ import {
 import { Account } from '~/models/Account';
 import { Member } from '~/models/Member';
 
-type KycStatus = 'verified' | 'pending' | 'rejected' | 'scrutiny';
+enum KycStatus {
+  VERIFIED = 'verified',
+  PENDING = 'pending',
+  REJECTED = 'rejected',
+  SCRUTINY = 'scrutiny'
+}
 
 @Table({
   tableName: 'account_verifications',
@@ -54,7 +59,7 @@ export class AccountVerification extends Model {
   @BelongsTo(() => Member, 'secondGuarantorId')
   secondGuarantor!: Member;
 
-  @Column(DataType.ENUM('verified', 'pending', 'rejected', 'scrutiny'))
+  @Column(DataType.ENUM(...Object.values(KycStatus)))
   kycStatus!: KycStatus;
 
   @Index('account_verifications_created_at_idx')

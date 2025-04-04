@@ -13,12 +13,12 @@ import {
 import { Account } from '~/models/Account';
 
 @Table({
-  tableName: 'nominees',
+  tableName: 'account_nominees',
   timestamps: true,
   underscored: true,
   paranoid: true
 })
-export class Nominee extends Model {
+export class AccountNominee extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column
@@ -44,11 +44,10 @@ export class Nominee extends Model {
   @Column
   mobile!: string;
 
-  @AllowNull(true)
   @Column(DataType.DECIMAL(10, 2))
   share?: number;
 
-  @Index('nominees_created_at_idx')
+  @Index('account_nominees_created_at_idx')
   @Column
   createdAt!: Date;
 

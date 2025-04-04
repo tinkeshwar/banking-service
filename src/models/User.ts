@@ -43,11 +43,9 @@ export class User extends Model {
   id!: number;
 
   @Unique
-  @AllowNull(false)
   @Column
   username!: string;
 
-  @AllowNull(false)
   @Column
   password!: string;
 

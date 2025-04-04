@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('nominees', {
+    await queryInterface.createTable('account_nominees', {
       id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
       accountId: { type: Sequelize.INTEGER, field: 'account_id', allowNull: false, references: { model: 'accounts', key: 'id' } },
       name: { type: Sequelize.STRING, field: 'name' },
@@ -16,14 +16,14 @@ module.exports = {
       deletedAt: { type: Sequelize.DATE, field: 'deleted_at' }
     });
 
-    await queryInterface.addIndex('nominees', ['account_id'], { name: 'nominees_account_id_idx' });
-    await queryInterface.addIndex('nominees', ['created_at'], { name: 'nominees_created_at_idx' });
+    await queryInterface.addIndex('account_nominees', ['account_id'], { name: 'account_nominees_account_id_idx' });
+    await queryInterface.addIndex('account_nominees', ['created_at'], { name: 'account_nominees_created_at_idx' });
   },
 
   async down (queryInterface) {
-    await queryInterface.removeConstraint('nominees', 'nominees_ibfk_1');
-    await queryInterface.removeIndex('nominees', 'nominees_created_at_idx');
-    await queryInterface.removeIndex('nominees', 'nominees_account_id_idx');
-    await queryInterface.dropTable('nominees');
+    await queryInterface.removeConstraint('account_nominees', 'account_nominees_ibfk_1');
+    await queryInterface.removeIndex('account_nominees', 'account_nominees_created_at_idx');
+    await queryInterface.removeIndex('account_nominees', 'account_nominees_account_id_idx');
+    await queryInterface.dropTable('account_nominees');
   }
 };

@@ -17,9 +17,13 @@ const globalErrorMiddleware = async (ctx: Context, next: Next) => {
       ctx.status = 500;
       ctx.body = { message: 'Internal Server Error', details: err};
       if (err instanceof Error) {
+        if(err.name === 'SequelizeUniqueConstraintError'){
+          ctx.status = 409;
+          ctx.body = { message: 'Duplicate entry', details: err.message};
+        }
         if(err.name === 'TokenExpiredError'){
           ctx.status = 401;
-          ctx.body = { message: 'Token expired', details: err};
+          ctx.body = { message: 'Token expired', details: err.message};
         }
       }
     }

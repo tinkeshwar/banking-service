@@ -13,9 +13,21 @@ import {
 } from 'sequelize-typescript';
 import { Member } from '~/models/Member';
 
-type AccountType = 'saving' | 'loan' | 'current' | 'fixed' | 'recurring';
-type AccountStatus = 'active' | 'freeze' | 'closed' | 'scrutiny' | 'pending';
+enum AccountType {
+  SAVING = 'saving',
+  LOAN = 'loan',
+  CURRENT = 'current',
+  FIXED = 'fixed',
+  RECURRING = 'recurring'
+}
 
+enum AccountStatus {
+  ACTIVE = 'active',
+  FREEZE = 'freeze',
+  CLOSED = 'closed',
+  SCRUTINY = 'scrutiny',
+  PENDING = 'pending'
+}
 @Table({
   tableName: 'accounts',
   timestamps: true,
@@ -36,11 +48,11 @@ export class Account extends Model {
   @BelongsTo(() => Member)
   member!: Member;
 
-  @Column(DataType.ENUM('saving', 'loan', 'current', 'fixed', 'recurring'))
+  @Column(DataType.ENUM(...Object.values(AccountType)))
   accountType!: AccountType;
 
   @Default('pending')
-  @Column(DataType.ENUM('active', 'freeze', 'closed', 'scrutiny', 'pending'))
+  @Column(DataType.ENUM(...Object.values(AccountStatus)))
   accountStatus!: AccountStatus;
 
   @Default(0.00)

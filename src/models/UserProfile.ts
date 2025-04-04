@@ -35,41 +35,28 @@ export class UserProfile extends Model {
   userId!: number;
 
   @Index('user_profiles_user_type_index')
-  @Column({
-    type: DataType.ENUM(...Object.values(UserType)),
-    allowNull: false,
-    defaultValue: UserType.EMPLOYEE
-  })
+  @Column(DataType.ENUM(...Object.values(UserType)))
   userType!: UserType;
 
-  @AllowNull(false)
   @Column
   firstName!: string;
 
-  @AllowNull(true)
   @Column
   middleName?: string;
 
-  @AllowNull(false)
   @Column
   lastName!: string;
 
   @Index('user_profiles_email_index')
-  @AllowNull(true)
   @Column
   email?: string;
 
   @Index('user_profiles_mobile_index')
-  @AllowNull(false)
   @Column
   mobile!: string;
 
   @Index('user_profiles_profile_status_index')
-  @Column({
-    type: DataType.ENUM(...Object.values(ProfileStatus)),
-    allowNull: false,
-    defaultValue: ProfileStatus.ACTIVE,
-  })
+  @Column(DataType.ENUM(...Object.values(ProfileStatus)))
   profileStatus!: ProfileStatus;
 
   @Index('user_profiles_created_at_index')

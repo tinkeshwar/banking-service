@@ -16,6 +16,18 @@ import {
 import { User } from '~/models/User';
 import { MemberAddress } from '~/models/MemberAddress';
 
+enum RelationType {
+  FATHER = 'Father',
+  MOTHER = 'Mother',
+  SPOUSE = 'Spouse'
+}
+
+enum EmploymentStatus {
+  ACTIVE = 'Active',
+  RETIRED = 'Retired',
+  RESIGNED = 'Resigned',
+  TERMINATED = 'Terminated'
+}
 @Table({
   tableName: 'members',
   timestamps: true,
@@ -36,14 +48,12 @@ export class Member extends Model {
   id!: number;
 
   @ForeignKey(() => User)
-  @AllowNull(false)
   @Column
   userId!: number;
 
   @Column
   firstName!: string;
 
-  @AllowNull(true)
   @Column
   middleName?: string;
 
@@ -53,8 +63,8 @@ export class Member extends Model {
   @Column
   guardian!: string;
 
-  @Column(DataType.ENUM('Father', 'Mother', 'Spouse'))
-  relationWithGuardian!: 'Father' | 'Mother' | 'Spouse';
+  @Column(DataType.ENUM(...Object.values(RelationType)))
+  relationWithGuardian!: RelationType;
 
   @Column(DataType.DATE)
   dateOfBirth!: Date;
@@ -74,7 +84,6 @@ export class Member extends Model {
   mobile!: string;
 
   @Unique
-  @AllowNull(true)
   @Column
   alternateNumber?: string;
 
@@ -87,8 +96,8 @@ export class Member extends Model {
   @Column(DataType.DECIMAL(10, 2))
   income!: number;
 
-  @Column(DataType.ENUM('Active', 'Retired', 'Resigned', 'Terminated'))
-  employmentStatus!: 'Active' | 'Retired' | 'Resigned' | 'Terminated';
+  @Column(DataType.ENUM(...Object.values(EmploymentStatus)))
+  employmentStatus!: EmploymentStatus;
 
   @Index('members_created_at_idx')
   @Column

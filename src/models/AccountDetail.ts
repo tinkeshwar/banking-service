@@ -6,15 +6,22 @@ import {
   AutoIncrement,
   ForeignKey,
   BelongsTo,
-  AllowNull,
   DataType,
   Index
 } from 'sequelize-typescript';
 import { Account } from '~/models/Account';
 
-type InterestCalculation = 'monthly' | 'quarterly' | 'yearly';
-type PaymentMode = 'cash' | 'transfer' | 'cheques';
+enum InterestCalculation {
+  MONTHLY = 'monthly',
+  QUARTERLY = 'quarterly',
+  YEARLY = 'yearly'
+}
 
+enum PaymentMode {
+  CASH = 'cash',
+  TRANSFER = 'transfer',
+  CHEQUES = 'cheques'
+}
 @Table({
   tableName: 'account_details',
   timestamps: true,
@@ -37,25 +44,21 @@ export class AccountDetail extends Model {
   @Column(DataType.DECIMAL(10, 2))
   interestRate!: number;
 
-  @Column(DataType.ENUM('monthly', 'quarterly', 'yearly'))
+  @Column(DataType.ENUM(...Object.values(InterestCalculation)))
   interestCalculation!: InterestCalculation;
 
-  @AllowNull(true)
   @Column(DataType.DECIMAL(10, 2))
   principalAmount?: number;
 
-  @AllowNull(true)
   @Column
   installments?: number;
 
-  @AllowNull(true)
   @Column(DataType.DECIMAL(10, 2))
   installmentAmount?: number;
 
-  @Column(DataType.ENUM('cash', 'transfer', 'cheques'))
+  @Column(DataType.ENUM(...Object.values(PaymentMode)))
   paymentMode!: PaymentMode;
 
-  @AllowNull(true)
   @Column
   paymentReceipt?: string;
 
