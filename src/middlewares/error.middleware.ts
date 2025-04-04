@@ -16,6 +16,12 @@ const globalErrorMiddleware = async (ctx: Context, next: Next) => {
     } else {
       ctx.status = 500;
       ctx.body = { message: 'Internal Server Error', details: err};
+      if (err instanceof Error) {
+        if(err.name === 'TokenExpiredError'){
+          ctx.status = 401;
+          ctx.body = { message: 'Token expired', details: err};
+        }
+      }
     }
   }
 
