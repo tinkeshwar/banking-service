@@ -36,7 +36,7 @@ export const updateMember = async (id: number, data: MemberCreateRequestInterfac
 
 export const listMembers = async (page: number, records: number) => {
   try {
-    const { count, rows } = await listAllMembers();
+    const { count, rows } = await listAllMembers(page, records);
     if(!count) throw ErrorIs('Members not found', 404);
     return { rows, meta: paginationMetadata(page, count, records)};
   } catch (error) {

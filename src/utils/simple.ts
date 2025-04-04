@@ -6,7 +6,5 @@ export const ErrorIs = (error: string, code: number): Boom => {
 }
 
 export const paginationMetadata = (page: number, totalItems: number, perPage: number): PaginationMetaInterface => {
-  const totalPages = Math.ceil(totalItems / perPage);
-  
-  return {  page, total: totalPages, perPage };
+  return {  page, total: totalItems, perPage };
 };
