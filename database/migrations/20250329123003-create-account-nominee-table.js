@@ -6,13 +6,13 @@ module.exports = {
     await queryInterface.createTable('account_nominees', {
       id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
       accountId: { type: Sequelize.INTEGER, field: 'account_id', allowNull: false, references: { model: 'accounts', key: 'id' } },
-      name: { type: Sequelize.STRING, field: 'name' },
-      relation: { type: Sequelize.STRING, field: 'relation' },
-      dateOfBirth: { type: Sequelize.DATE, field: 'date_of_birth' },
-      mobile: { type: Sequelize.STRING, field: 'mobile' },
-      share: { type: Sequelize.DECIMAL(10, 2), field: 'share', allowNull: true },
-      createdAt: { type: Sequelize.DATE, field: 'created_at' },
-      updatedAt: { type: Sequelize.DATE, field: 'updated_at' },
+      name: { type: Sequelize.STRING, field: 'name', allowNull: false },
+      relation: { type: Sequelize.STRING, field: 'relation', allowNull: false },
+      dateOfBirth: { type: Sequelize.DATE, field: 'date_of_birth', allowNull: false },
+      mobile: { type: Sequelize.STRING, field: 'mobile', allowNull: false },
+      share: { type: Sequelize.DECIMAL(10, 2), field: 'share' },
+      createdAt: { type: Sequelize.DATE, field: 'created_at', allowNull: false },
+      updatedAt: { type: Sequelize.DATE, field: 'updated_at', allowNull: false },
       deletedAt: { type: Sequelize.DATE, field: 'deleted_at' }
     });
 

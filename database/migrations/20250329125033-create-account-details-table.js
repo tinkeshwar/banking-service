@@ -5,17 +5,17 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('account_details', {
       id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-      accountId: { type: Sequelize.INTEGER, references: { model: 'accounts', key: 'id' }, field: 'account_id' },
+      accountId: { type: Sequelize.INTEGER, references: { model: 'accounts', key: 'id' }, field: 'account_id', allowNull: false },
       interestRate: { type: Sequelize.DECIMAL(10,2), field: 'interest_rate' },
       interestCalculation: { type: Sequelize.ENUM('monthly', 'quarterly', 'yearly'), field: 'interest_calculation' },
-      principalAmount: { type: Sequelize.DECIMAL(10,2), allowNull: true, field: 'principal_amount' },
-      installments: { type: Sequelize.INTEGER, allowNull: true },
-      installmentAmount: { type: Sequelize.DECIMAL(10,2), allowNull: true, field: 'installment_amount' },
-      paymentMode: { type: Sequelize.ENUM('cash', 'transfer', 'cheques'), field: 'payment_mode' },
-      paymentReceipt: { type: Sequelize.STRING, allowNull: true, field: 'payment_receipt' },
-      createdAt: { type: Sequelize.DATE, field: 'created_at' },
-      updatedAt: { type: Sequelize.DATE, field: 'updated_at' },
-      deletedAt: { type: Sequelize.DATE, field: 'deleted_at', allowNull: true }
+      principalAmount: { type: Sequelize.DECIMAL(10,2), field: 'principal_amount' },
+      installments: { type: Sequelize.INTEGER },
+      installmentAmount: { type: Sequelize.DECIMAL(10,2), field: 'installment_amount' },
+      paymentMode: { type: Sequelize.ENUM('cash', 'transfer', 'cheques'), field: 'payment_mode', allowNull: false },
+      paymentReceipt: { type: Sequelize.STRING, field: 'payment_receipt' },
+      createdAt: { type: Sequelize.DATE, field: 'created_at', allowNull: false },
+      updatedAt: { type: Sequelize.DATE, field: 'updated_at', allowNull: false },
+      deletedAt: { type: Sequelize.DATE, field: 'deleted_at' }
     });
 
     await queryInterface.addIndex('account_details', ['account_id'], { name: 'account_details_account_id_idx' });

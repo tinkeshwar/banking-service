@@ -14,7 +14,7 @@ module.exports = {
       balanceAfterTransaction: { type: Sequelize.DECIMAL(10,2), allowNull: false, field: 'balance_after_transaction' },
       createdAt: { type: Sequelize.DATE, allowNull: false },
       updatedAt: { type: Sequelize.DATE, allowNull: false },
-      deletedAt: { type: Sequelize.DATE, allowNull: true },
+      deletedAt: { type: Sequelize.DATE },
       createdBy: { type: Sequelize.INTEGER, allowNull: false, field: 'created_by', references: { model: 'users', key: 'id' } }
     });
 

@@ -8,14 +8,14 @@ module.exports = {
       userId: { type: Sequelize.INTEGER, allowNull: false, references: { model: 'users', key: 'id' }, field: 'user_id' },
       userType: { type: Sequelize.ENUM('admin', 'employee', 'consumer'), allowNull: false, defaultValue: 'employee', field: 'user_type' },
       firstName: { type: Sequelize.STRING, allowNull: false, field: 'first_name' },
-      middleName: { type: Sequelize.STRING, allowNull: true, field: 'middle_name' },
+      middleName: { type: Sequelize.STRING, field: 'middle_name' },
       lastName: { type: Sequelize.STRING, allowNull: false, field: 'last_name' },
-      email: { type: Sequelize.STRING, allowNull: true, field: 'email' },
+      email: { type: Sequelize.STRING, field: 'email' },
       mobile: { type: Sequelize.STRING, allowNull: false, field: 'mobile' },
       profileStatus: { type: Sequelize.ENUM('active', 'inactive', 'pending'), allowNull: false, defaultValue: 'active', field: 'profile_status' },
       createdAt: { type: Sequelize.DATE, allowNull: false, field: 'created_at' },
       updatedAt: { type: Sequelize.DATE, allowNull: false, field: 'updated_at' },
-      deletedAt: { type: Sequelize.DATE, allowNull: true, field: 'deleted_at' }
+      deletedAt: { type: Sequelize.DATE, field: 'deleted_at' }
     });
 
     await queryInterface.addIndex('user_profiles', ['user_id'], { name: 'user_profiles_user_id_index' });

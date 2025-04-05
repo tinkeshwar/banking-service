@@ -8,14 +8,14 @@ module.exports = {
       memberId: { type: Sequelize.INTEGER, allowNull: false, field: 'member_id', references: { model: 'members', key: 'id' } },
       addressType: { type: Sequelize.ENUM('local', 'current', 'permanent'), allowNull: false, field: 'address_type' },
       line1: { type: Sequelize.STRING, allowNull: false },
-      line2: { type: Sequelize.STRING, allowNull: true },
+      line2: { type: Sequelize.STRING },
       city: { type: Sequelize.STRING, allowNull: false },
       state: { type: Sequelize.STRING, allowNull: false },
       country: { type: Sequelize.STRING, allowNull: false },
       postalCode: { type: Sequelize.STRING, allowNull: false, field: 'postal_code' },
       createdAt: { type: Sequelize.DATE, allowNull: false, field: 'created_at' },
       updatedAt: { type: Sequelize.DATE, allowNull: false, field: 'updated_at' },
-      deletedAt: { type: Sequelize.DATE, allowNull: true, field: 'deleted_at' }
+      deletedAt: { type: Sequelize.DATE, field: 'deleted_at' }
     });
 
     await queryInterface.addIndex('member_addresses', ['member_id'], { name: 'member_addresses_member_id_idx' });
