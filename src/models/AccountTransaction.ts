@@ -10,19 +10,10 @@ import {
   Default,
   Index
 } from 'sequelize-typescript';
+import { TransactionMode, TransactionType } from '~/@types/account.dto';
 import { Account } from '~/models/Account';
 import { User } from '~/models/User';
 
-enum TransactionType {
-  CREDIT = 'credit',
-  DEBIT = 'debit'
-}
-
-enum TransactionMode {
-  CASH = 'cash',
-  TRANSFER = 'transfer',
-  CHEQUE = 'cheque'
-}
 @Table({
   tableName: 'account_transactions',
   timestamps: true,

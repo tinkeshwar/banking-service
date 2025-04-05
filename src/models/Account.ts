@@ -11,23 +11,9 @@ import {
   Default,
   Index
 } from 'sequelize-typescript';
+import { AccountType, AccountStatus } from '~/@types/account.dto';
 import { Member } from '~/models/Member';
 
-enum AccountType {
-  SAVING = 'saving',
-  LOAN = 'loan',
-  CURRENT = 'current',
-  FIXED = 'fixed',
-  RECURRING = 'recurring'
-}
-
-enum AccountStatus {
-  ACTIVE = 'active',
-  FREEZE = 'freeze',
-  CLOSED = 'closed',
-  SCRUTINY = 'scrutiny',
-  PENDING = 'pending'
-}
 @Table({
   tableName: 'accounts',
   timestamps: true,

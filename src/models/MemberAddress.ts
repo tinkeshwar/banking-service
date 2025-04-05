@@ -6,18 +6,11 @@ import {
   AutoIncrement,
   ForeignKey,
   BelongsTo,
-  AllowNull,
   DataType,
   Index
 } from 'sequelize-typescript';
+import { AddressType } from '~/@types/member.dto';
 import { Member } from '~/models/Member';
-
-enum AddressType {
-  LOCAL = 'local',
-  CURRENT = 'current',
-  PERMANENT = 'permanent'
-}
-
 @Table({
   tableName: 'member_addresses',
   timestamps: true,

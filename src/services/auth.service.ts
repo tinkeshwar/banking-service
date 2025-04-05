@@ -2,8 +2,8 @@ import JWT from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { JWT_SECRET, JWT_EXPIRATION, REFRESH_TOKEN_EXPIRATION } from '~/constants/variables';
 import { AuthPayloadInterface } from '~/@types/auth.dto';
-import { User } from '~/models/User';
 import { ErrorIs } from '~/utils/simple';
+import { UserInterface } from '~/@types/user.dto';
 
 class AuthService {
   private static instance: AuthService;
@@ -79,12 +79,12 @@ class AuthService {
 
   /**
    * Authenticate a user with their password
-   * @param {User} user - The user object from the database
+   * @param {UserInterface} user - The user object from the database
    * @param {string} password - The password to verify
-   * @returns {{accessToken: string, refreshToken: string}} - Object containing generated tokens if authentication successful
+   * @returns {{accessToken: string, refreshToken: string, user: UserInterface}} - Object containing generated tokens if authentication successful
    * @throws {Error} - If authentication fails
    */
-  private authenticateUser(user: User, password: string): {accessToken: string, refreshToken: string} {
+  private authenticateUser(user: UserInterface, password: string): {user: UserInterface, accessToken: string, refreshToken: string} {
     const isPasswordValid = this.comparePassword(password, user.password);
     if (!isPasswordValid) {
       throw ErrorIs('Incorrect password.', 422);
@@ -95,7 +95,8 @@ class AuthService {
 
     return {
       accessToken,
-      refreshToken
+      refreshToken,
+      user
     };
   }
   
@@ -128,11 +129,11 @@ class AuthService {
 
   /**
    * Static method to authenticate a user
-   * @param {User} user - The user object from the database
+   * @param {UserInterface} user - The user object from the database
    * @param {string} password - The password to verify
-   * @returns {Promise<{accessToken: string, refreshToken: string}>} - Object containing generated tokens if authentication successful
+   * @returns {Promise<{accessToken: string, refreshToken: string, user: UserInterface}>} - Object containing generated tokens if authentication successful
    */
-  static async authenticateUser(user: User, password: string): Promise<{accessToken: string, refreshToken: string}> {
+  static async authenticateUser(user: UserInterface, password: string): Promise<{user: UserInterface, accessToken: string, refreshToken: string}> {
     return this.getInstance().authenticateUser(user, password);
   }
 
@@ -153,7 +154,8 @@ class AuthService {
 
     return {
       accessToken: newAccessToken,
-      refreshToken: newRefreshToken
+      refreshToken: newRefreshToken,
+
     };
   }
 }

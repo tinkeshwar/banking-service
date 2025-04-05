@@ -1,4 +1,4 @@
-import { UserInterface, UserProfileInterface } from "~/@types/user.dto";
+import { BaseUserInterface, BaseUserProfileInterface } from "~/@types/user.dto";
 import { User } from "~/models/User";
 import { UserProfile } from "~/models/UserProfile";
 
@@ -9,6 +9,6 @@ export const findByUsernameAndUserType = async(username: string, userType: strin
   });
 }
 
-export const createUserWithProfile = async(user: UserInterface, profile: UserProfileInterface) => {
+export const createUserWithProfile = async(user: BaseUserInterface, profile: BaseUserProfileInterface) => {
   return await User.create({ ...user, profiles: [profile]}, { include: [UserProfile] });
 }

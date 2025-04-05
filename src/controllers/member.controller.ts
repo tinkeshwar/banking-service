@@ -1,8 +1,8 @@
-import { MemberCreateRequestInterface } from "~/@types/member.dto";
+import { MemberCreateRequestInterface, MemberResponseInterface } from "~/@types/member.dto";
 import { createMemberWithUser, getMemberById, listAllMembers, updateMemberWithAddress } from "~/repositories/member.repository";
 import { ErrorIs, paginationMetadata } from "~/utils/simple";
 
-export const createMember = async (data: MemberCreateRequestInterface, userType: 'consumer' | 'employee' = 'consumer') => {
+export const createMember = async (data: MemberCreateRequestInterface, userType: 'consumer' | 'employee' = 'consumer'): Promise<MemberResponseInterface> => {
   try {
     const member = await createMemberWithUser(data, userType);
     if(!member) throw ErrorIs('Member not created', 500);

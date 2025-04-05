@@ -8,26 +8,14 @@ import {
   ForeignKey,
   BelongsTo,
   Unique,
-  AllowNull,
   DataType,
   Index,
   HasMany
 } from 'sequelize-typescript';
 import { User } from '~/models/User';
 import { MemberAddress } from '~/models/MemberAddress';
+import { EmploymentStatus, RelationType } from '~/@types/member.dto';
 
-enum RelationType {
-  FATHER = 'Father',
-  MOTHER = 'Mother',
-  SPOUSE = 'Spouse'
-}
-
-enum EmploymentStatus {
-  ACTIVE = 'Active',
-  RETIRED = 'Retired',
-  RESIGNED = 'Resigned',
-  TERMINATED = 'Terminated'
-}
 @Table({
   tableName: 'members',
   timestamps: true,

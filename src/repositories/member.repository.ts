@@ -1,15 +1,15 @@
-import { MemberAddressInterface, MemberCreateRequestInterface, MemberInterface } from "~/@types/member.dto"
+import { BaseMemberAddressInterface, BaseMemberInterface, MemberCreateRequestInterface, MemberResponseInterface } from "~/@types/member.dto"
 import { Member } from "~/models/Member"
 import { MemberAddress } from "~/models/MemberAddress"
 import { User } from "~/models/User";
 import { UserProfile } from "~/models/UserProfile";
 import sequelize from "~/utils/database";
 
-export const createMemberWithAddresses = async (member: MemberInterface & { userId: number }, addresses: MemberAddressInterface[]): Promise<Member> => {
-  return await Member.create({ ...member, addresses }, { include: [MemberAddress] });
+export const createMemberWithAddresses = async (member: BaseMemberInterface & { userId: number }, addresses: BaseMemberAddressInterface[]): Promise<MemberResponseInterface> => {
+  return await Member.create({ ...member, addresses }, { include: [MemberAddress] }) as MemberResponseInterface;
 }
 
-export const createMemberWithUser = async (data: MemberCreateRequestInterface, userType: string) => {
+export const createMemberWithUser = async (data: MemberCreateRequestInterface, userType: string): Promise<MemberResponseInterface> => {
   const { addresses, ...memberData } = data;
   const { email, mobile, firstName, middleName, lastName, alternateNumber } = data;
   
@@ -33,10 +33,10 @@ export const createMemberWithUser = async (data: MemberCreateRequestInterface, u
     });
   });
 
-  return result;
+  return result as MemberResponseInterface;
 }
 
-export const updateMemberWithAddress = async (member: MemberInterface, addresses: MemberAddressInterface[], memberId: number): Promise<Boolean> => {
+export const updateMemberWithAddress = async (member: BaseMemberInterface, addresses: BaseMemberAddressInterface[], memberId: number): Promise<Boolean> => {
   // TODO: It need improvement in logic (Priority 3).
   const mappedAddresses = addresses.map((address) => { return { ...address, memberId }});
   await MemberAddress.destroy({ where: { memberId } });
@@ -54,8 +54,8 @@ export const listAllMembers = async (page: number = 1, perPage: number = 10) => 
   });
 }
 
-export const getMemberById = async (id: number) => {
+export const getMemberById = async (id: number): Promise<MemberResponseInterface> => {
   return await Member.findByPk(id, {
     include: [MemberAddress]
-  });
+  }) as MemberResponseInterface;
 }

@@ -1,18 +1,6 @@
-import { Table, Column, Model, DataType, AutoIncrement, PrimaryKey, ForeignKey, AllowNull, BelongsTo, Index } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, AutoIncrement, PrimaryKey, ForeignKey, BelongsTo, Index } from 'sequelize-typescript';
+import { ProfileStatus, UserType } from '~/@types/user.dto';
 import { User } from '~/models/User';
-
-enum UserType {
-  ADMIN = 'admin',
-  EMPLOYEE = 'employee',
-  CONSUMER = 'consumer'
-}
-
-enum ProfileStatus {
-  ACTIVE = 'active',
-  INACTIVE = 'inactive',
-  PENDING = 'pending'
-}
-
 @Table({
   tableName: 'user_profiles',
   timestamps: true,

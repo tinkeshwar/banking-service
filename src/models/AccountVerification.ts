@@ -7,8 +7,7 @@ import {
   ForeignKey,
   BelongsTo,
   DataType,
-  Index,
-  AllowNull
+  Index
 } from 'sequelize-typescript';
 import { Account } from '~/models/Account';
 import { Member } from '~/models/Member';

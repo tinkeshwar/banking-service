@@ -9,19 +9,9 @@ import {
   DataType,
   Index
 } from 'sequelize-typescript';
+import { InterestCalculation, PaymentMode } from '~/@types/account.dto';
 import { Account } from '~/models/Account';
 
-enum InterestCalculation {
-  MONTHLY = 'monthly',
-  QUARTERLY = 'quarterly',
-  YEARLY = 'yearly'
-}
-
-enum PaymentMode {
-  CASH = 'cash',
-  TRANSFER = 'transfer',
-  CHEQUES = 'cheques'
-}
 @Table({
   tableName: 'account_details',
   timestamps: true,
