@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import { UserType } from '~/@types/user.dto';
 
 export const createUserSchema = Joi.object({
   user: Joi.object({
@@ -8,10 +9,10 @@ export const createUserSchema = Joi.object({
     password: Joi.string().required()
   }).required(),
   profile: Joi.object({
-    userType: Joi.string().valid('admin', 'employee', 'consumer').required(),
-    firstname: Joi.string().required(),
-    lastname: Joi.string().required(),
-    currentAddress: Joi.string().required(),
-    permanentAddress: Joi.string().required()
+    user_type: Joi.string().valid(...Object.values(UserType)).required(),
+    first_name: Joi.string().required(),
+    last_name: Joi.string().required(),
+    current_address: Joi.string().required(),
+    permanent_address: Joi.string().required()
   }).required()
 });

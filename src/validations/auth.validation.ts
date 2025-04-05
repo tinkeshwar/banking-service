@@ -1,14 +1,12 @@
 import Joi from 'joi';
+import { UserType } from '~/@types/user.dto';
 
 export const loginSchema = Joi.object({
-  username: Joi.string().required().messages({ 'any.required': 'Username is required' }),
-  password: Joi.string().required().messages({ 'any.required': 'Password is required' }),
-  user_type: Joi.string().valid('admin', 'customer', 'employee').required().messages({
-    'any.required': 'User type is required',
-    'any.only': 'User type must be either "admin" or "customer" or "employee"',
-  }),
+  username: Joi.string().required(),
+  password: Joi.string().required(),
+  user_type: Joi.string().valid(...Object.values(UserType)).required(),
 });
 
 export const refreshTokenSchema = Joi.object({
-  token: Joi.string().required().messages({ 'any.required': 'Refresh token is required' }),
+  token: Joi.string().required()
 });

@@ -9,16 +9,9 @@ import {
   DataType,
   Index
 } from 'sequelize-typescript';
+import { KycStatus } from '~/@types/account.dto';
 import { Account } from '~/models/Account';
 import { Member } from '~/models/Member';
-
-enum KycStatus {
-  VERIFIED = 'verified',
-  PENDING = 'pending',
-  REJECTED = 'rejected',
-  SCRUTINY = 'scrutiny'
-}
-
 @Table({
   tableName: 'account_verifications',
   timestamps: true,

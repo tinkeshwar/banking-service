@@ -1,0 +1,22 @@
+{
+  "savings":{
+    "interestRate": 10,
+    "interestCalculation": "monthly"
+  },
+  "loan":{
+    "interestRate": 10,
+    "interestCalculation": "monthly"
+  },
+  "fixed":{
+    "interestRate": 10,
+    "interestCalculation": "monthly"
+  },
+  "recurring":{
+    "interestRate": 10,
+    "interestCalculation": "monthly"
+  },
+  "current":{
+    "interestRate": 10,
+    "interestCalculation": "monthly"
+  }
+}
